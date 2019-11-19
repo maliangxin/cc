@@ -1,0 +1,9 @@
+package com.mal.core;
+
+@Slf4j
+public class LogExampleOther {
+  
+  public static void main(String... args) {
+    log.error("Something else is wrong here");
+  }
+}

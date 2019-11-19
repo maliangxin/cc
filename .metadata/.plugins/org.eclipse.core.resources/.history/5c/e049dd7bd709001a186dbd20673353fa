@@ -1,0 +1,5 @@
+package com.mal.core.controller;
+
+public class LogbackController {
+
+}

@@ -1,0 +1,45 @@
+package com.rxiu.gateway.core.filter;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.rxiu.gateway.core.ContantValue;
+import com.rxiu.gateway.core.FilterOrder;
+
+public class IPLimiterFilter extends AbstractPreZuulFilter{
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(IPLimiterFilter.class);
+	private static ConcurrentHashMap<String,Integer> ipCount = new ConcurrentHashMap<String,Integer>();
+	
+	
+	@Override
+	public Object doRun() {
+		HttpServletRequest request = context.getRequest();
+		String ip = request.getRemoteAddr();
+		System.out.println("进入IP校验流程！客户端ip："+ip);
+		Integer count = ipCount.get(ip);
+		if(count == null) {
+			count = 1;
+			ipCount.put(ip, count);
+			return success();
+		}else {
+			if(count >= ContantValue.MAX_IP_ACCESS) {
+				 LOGGER.info("IP ACCSEE limit:{}", ip);
+		         return fail(401, "IP ACCSEE limit:{}");
+			}
+			count ++;
+			ipCount.put(ip, count);
+			return success();
+		}
+	}
+
+	@Override
+	public int filterOrder() {
+		return FilterOrder.IP_ACCESS_ORDER;
+	}
+
+}

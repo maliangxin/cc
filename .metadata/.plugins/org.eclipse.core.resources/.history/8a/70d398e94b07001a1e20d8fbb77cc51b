@@ -1,0 +1,16 @@
+server:
+  port: 8000
+ 
+spring:
+  application:
+    name: spring-cloud-gateway
+ 
+#注册中心指向start    
+eureka:
+  instance:
+    instance-id: spring-cloud-gateway
+    appname: ${spring.application.name}
+  client: 
+    service-url: 
+      defaultZone: http://admin:1qaz2wsx@127.0.0.1:8888/eureka/
+#注册中心指向end

@@ -1,0 +1,56 @@
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+21  * @author braska
+22  * @date 2018/06/25.
+23  **/
+24 @EnableAutoConfiguration
+25 @EnableZuulProxy
+26 @ComponentScan(basePackages = {
+27         "com.syher.zuul.core",
+28         "com.syher.zuul.service"
+29 })
+30 public class SpringBootZuulApplication implements CommandLineRunner {
+31     @Autowired
+32     ApplicationEventPublisher publisher;
+33     @Autowired
+34     RouteLocator routeLocator;
+35 
+36     private ScheduledExecutorService executor;
+37     private Long lastModified = 0L;
+38     private boolean instance = true;
+39 
+40     public static void main(String[] args) {
+41         SpringApplication.run(SpringBootZuulApplication.class, args);
+42     }
+43 
+44     @Override
+45     public void run(String... args) throws Exception {
+46         executor = Executors.newSingleThreadScheduledExecutor(
+47                 new ThreadFactoryBuilder().setNameFormat("properties read.").build()
+48         );
+49         executor.scheduleWithFixedDelay(() -> publish(), 0, 1, TimeUnit.SECONDS);
+50     }
+51 
+52     private void publish() {
+53         if (isPropertiesModified()) {
+54             publisher.publishEvent(new RoutesRefreshedEvent(routeLocator));
+55         }
+56     }
+57 
+58     private boolean isPropertiesModified() {
+59         File file = new File(this.getClass().getClassLoader().getResource(PropertiesRouter.PROPERTIES_FILE).getPath());
+60         if (instance) {
+61             instance = false;
+62             return false;
+63         }
+64         if (file.lastModified() > lastModified) {
+65             lastModified = file.lastModified();
+66             return true;
+67         }
+68         return false;
+69     }
+70 }

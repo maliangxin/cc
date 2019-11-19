@@ -1,0 +1,37 @@
+package com.example.demo.filter;
+
+@Configuration
+21 public class ZuulConfigure {
+22 
+23     @Autowired
+24     ZuulProperties zuulProperties;
+25     @Autowired
+26     ServerProperties server;
+27 
+28     /**
+29      * 动态路由
+30      * @return
+31      */
+32     @Bean
+33     public PropertiesRouter propertiesRouter() {
+34         return new PropertiesRouter(this.server.getServletPrefix(), this.zuulProperties);
+35     }
+36 
+37     /**
+38      * 动态负载
+39      * @return
+40      */
+41     @Bean
+42     public IRule loadBalance() {
+43         return new ServerLoadBalancerRule();
+44     }
+45 
+46     /**
+47      * 自定义过滤器
+48      * @return
+49      */
+50     @Bean
+51     public ZuulFilter rateLimiterFilter() {
+52         return new RateLimiterFilter();
+53     }
+54 }

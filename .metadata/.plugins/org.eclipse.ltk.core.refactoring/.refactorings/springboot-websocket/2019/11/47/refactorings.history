@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.mal.websocket.stomp.StompCotroller&apos; to &apos;StompController&apos;&#x0D;&#x0A;- Original project: &apos;springboot-websocket&apos;&#x0D;&#x0A;- Original element: &apos;com.mal.websocket.stomp.StompCotroller&apos;&#x0D;&#x0A;- Renamed element: &apos;com.mal.websocket.stomp.StompController&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;StompCotroller&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;com.mal.websocket.stomp{StompCotroller.java[StompCotroller" matchStrategy="1" name="StompController" qualified="false" references="true" similarDeclarations="false" stamp="1574131550922" textual="false" version="1.0"/>
+</session>

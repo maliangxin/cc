@@ -1,0 +1,16 @@
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+	
+	@RequestMapping("hello.do")
+	public String hello() {
+		System.out.println("hello  welcome  to  my  home");
+		return "hello world";
+	}
+	
+
+}

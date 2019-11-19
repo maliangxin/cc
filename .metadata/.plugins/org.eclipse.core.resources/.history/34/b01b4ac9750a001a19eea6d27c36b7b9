@@ -1,0 +1,7 @@
+package com.mal.websocket.config;
+
+@Configuration
+@EnableWebSocketMessageBroker
+public class StompConfiguration {
+
+}

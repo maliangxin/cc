@@ -1,0 +1,12 @@
+package com.mal.core.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Log4j2Controller {
+
+	public void printinfo() {
+		
+	}
+	
+}

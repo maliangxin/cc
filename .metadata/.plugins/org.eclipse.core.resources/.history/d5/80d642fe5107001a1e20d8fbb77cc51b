@@ -1,0 +1,35 @@
+package com.rxiu.gateway.core;
+
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.RateLimitKeyGenerator;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.RateLimitUtils;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.RateLimiter;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties;
+import com.netflix.zuul.ZuulFilter;
+import com.rxiu.gateway.core.filter.IPLimiterFilter;
+import com.rxiu.gateway.core.filter.RateLimiterFilter;
+
+import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author rxiu
+ * @date 2019/4/3
+ */
+@Configuration
+public class GatewayConfigure {
+
+
+    @Bean
+    public ZuulFilter rateLimiterFilter(RateLimiter rateLimiter, RateLimitProperties rateLimitProperties,
+            RouteLocator routeLocator, RateLimitKeyGenerator rateLimitKeyGenerator,
+            RateLimitUtils rateLimitUtils) {
+        return new RateLimiterFilter(rateLimiter,rateLimitProperties,routeLocator,rateLimitKeyGenerator, rateLimitUtils);
+    }
+    
+    @Bean
+    public ZuulFilter ipLimiterFilter() {
+        return new IPLimiterFilter();
+    }
+    
+}

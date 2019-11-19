@@ -1,0 +1,22 @@
+package com.rxiu.gateway.core;
+
+import com.netflix.zuul.ZuulFilter;
+import com.rxiu.gateway.core.filter.IPLimiterFilter;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author rxiu
+ * @date 2019/4/3
+ */
+@Configuration
+public class GatewayConfigure {
+
+
+    @Bean
+    public ZuulFilter ipLimiterFilter() {
+        return new IPLimiterFilter();
+    }
+    
+}

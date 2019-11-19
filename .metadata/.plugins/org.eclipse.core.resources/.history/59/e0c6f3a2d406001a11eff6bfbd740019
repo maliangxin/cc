@@ -1,0 +1,10 @@
+package com.rxiu.gateway.core.filter;
+
+import com.rxiu.gateway.core.FilterType;
+
+public abstract class AbstractPreZuulFilter extends AbstractZuulFilter { 
+     @Override
+     public String filterType() {
+         return FilterType.pre.name();
+     }
+ }

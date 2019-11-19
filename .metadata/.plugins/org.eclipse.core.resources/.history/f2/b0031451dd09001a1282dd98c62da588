@@ -1,0 +1,7 @@
+package com.mal.core;
+
+public class LogExampleOther {
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LogExampleOther.class);
+  public static void main(String... args) {
+  }
+}

@@ -1,0 +1,11 @@
+package com.example.demo.filter;
+
+
+public class AbstractPreZuulFilter  extends AbstractZuulFilter {
+
+	@Override
+	public String filterType() {
+		return FilterType.pre.name();
+	}
+
+}

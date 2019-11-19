@@ -1,0 +1,9 @@
+server:
+  port: 8888
+  
+zuul:
+  routes:
+    retelimit:
+      path: /common/**
+      url: http://localhost:8888
+      yangjiaxin_1994

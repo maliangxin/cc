@@ -1,0 +1,44 @@
+package com.rxiu.gateway.core;
+
+import static java.util.concurrent.TimeUnit.MINUTES;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+
+@RefreshScope
+@ConfigurationProperties(RateLimitProperties.PREFIX)
+public class RateLimitProperties {
+	
+	public static final String PREFIX = "zuul.ratelimit";
+
+	private Long refreshInterval = MINUTES.toSeconds(1L);
+
+    private Long limit;
+
+    private Long quota;
+
+	public Long getRefreshInterval() {
+		return refreshInterval;
+	}
+
+	public void setRefreshInterval(Long refreshInterval) {
+		this.refreshInterval = refreshInterval;
+	}
+
+	public Long getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Long limit) {
+		this.limit = limit;
+	}
+
+	public Long getQuota() {
+		return quota;
+	}
+
+	public void setQuota(Long quota) {
+		this.quota = quota;
+	}
+	
+}

@@ -1,0 +1,6 @@
+package com.mal.websocket.config;
+
+
+public class StompConfiguration {
+
+}

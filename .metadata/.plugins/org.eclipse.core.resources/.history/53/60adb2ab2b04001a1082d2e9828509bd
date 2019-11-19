@@ -1,0 +1,44 @@
+package com.example.demo.filter;
+
+package com.syher.zuul.core.zuul.filter;
+2 
+3 import com.netflix.zuul.ZuulFilter;
+4 import com.netflix.zuul.context.RequestContext;
+5 import com.syher.zuul.core.zuul.ContantValue;
+6 
+7 /**
+8  * @author braska
+9  * @date 2018/06/29.
+10  **/
+11 public abstract class AbstractZuulFilter extends ZuulFilter {
+12 
+13     protected RequestContext context;
+14 
+15     @Override
+16     public boolean shouldFilter() {
+17         RequestContext ctx = RequestContext.getCurrentContext();
+18         return (boolean) (ctx.getOrDefault(ContantValue.NEXT_FILTER, true));
+19     }
+20 
+21     @Override
+22     public Object run() {
+23         context = RequestContext.getCurrentContext();
+24         return doRun();
+25     }
+26 
+27     public abstract Object doRun();
+28 
+29     public Object fail(Integer code, String message) {
+30         context.set(ContantValue.NEXT_FILTER, false);
+31         context.setSendZuulResponse(false);
+32         context.getResponse().setContentType("text/html;charset=UTF-8");
+33         context.setResponseStatusCode(code);
+34         context.setResponseBody(String.format("{\"result\":\"%s!\"}", message));
+35         return null;
+36     }
+37 
+38     public Object success() {
+39         context.set(ContantValue.NEXT_FILTER, true);
+40         return null;
+41     }
+42 }

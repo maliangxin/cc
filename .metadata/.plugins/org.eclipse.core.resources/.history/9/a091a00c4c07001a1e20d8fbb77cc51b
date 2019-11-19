@@ -1,0 +1,11 @@
+package com.rxiu.gateway.core;
+
+/**
+ * @author rxiu
+ * @date 2019/4/3
+ */
+public class FilterOrder {
+    public static final Integer IP_ACCESS_ORDER = 2;
+    public static final Integer USER_RIGHT_ORDER = 1;
+    public static final Integer RATE_LIMITER_ORDER = 0;
+}

@@ -1,0 +1,14 @@
+package com.mal.core.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class LogbackController {
+	
+	
+	public String printinfo() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

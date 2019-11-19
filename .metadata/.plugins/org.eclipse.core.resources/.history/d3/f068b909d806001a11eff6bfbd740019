@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>  
+<script src="http://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>  
+<script type="text/javascript">
+var socket = new SockJS('https://test.com/stompwebsocket');
+var stompClient = Stomp.over(socket);
+stompClient.connect({}, function(frame) {
+	stompClient.subscribe('/topic/public.messages', function(txt) {
+		alert(txt);
+	});
+});
+ 
+function send(txt) {
+	alert();
+	stompClient.send("/send.message", {}, txt);
+}
+
+function pong() {
+	alert();
+	var txt = "hello pong";
+}
+</script>
+</head>
+<body>
+	<button ¦Ïnclick="send(new Date())">Send</button>
+	<button ¦Ïnclick="pong()">pong</button>
+</body>
+</html>

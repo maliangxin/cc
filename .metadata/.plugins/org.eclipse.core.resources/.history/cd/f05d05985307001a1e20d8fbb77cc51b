@@ -1,0 +1,8 @@
+package com.rxiu.gateway.core;
+
+
+
+@ConfigurationProperties(RateLimitProperties.PREFIX)
+public class RateLimitProperties {
+
+}

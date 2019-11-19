@@ -1,0 +1,54 @@
+package com.rxiu.gateway.core.filter;
+
+import org.springframework.http.HttpStatus;
+
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.rxiu.gateway.core.ContantValue;
+
+/**
+ * 
+ *（1）shouldFilter()方法：返回一个Boolean值，判断该过滤器是否需要执行。返回true执行，返回false不执行。
+ *（2）run()方法：过滤器的具体业务逻辑。
+ *（3）filterType()方法：返回字符串，代表过滤器的类型。包含以下4种：
+ *       - pre：请求在被路由之前执行
+ *       - routing：在路由请求时调用
+ *       - post：在routing和errror过滤器之后调用
+ *       - error：处理请求时发生错误调用
+ *（4）filterOrder()方法：通过返回的int值来定义过滤器的执行顺序，数字越小优先级越高。
+ */
+public abstract  class AbstractZuulFilter extends ZuulFilter{
+
+	protected RequestContext context;
+ 
+     @Override
+     public boolean shouldFilter() {
+         RequestContext ctx = RequestContext.getCurrentContext();
+         return (boolean) (ctx.getOrDefault(ContantValue.NEXT_FILTER, true));
+     }
+ 
+     @Override
+     public Object run() {
+         context = RequestContext.getCurrentContext();
+         return doRun();
+     }
+ 
+     public abstract Object doRun();
+ 
+     public Object fail(Integer code, String message) {
+         context.set(ContantValue.NEXT_FILTER, false);
+         context.setSendZuulResponse(false);
+         context.getResponse().setContentType("text/html;charset=UTF-8");
+         context.setResponseStatusCode(HttpStatus.TOO_MANY_REQUESTS.value());
+         context.setResponseBody(String.format("{\"result\":\"%s!\"}", message));
+         return null;
+     }
+ 
+     public Object success() {
+         context.set(ContantValue.NEXT_FILTER, true);
+         return null;
+     }
+
+	
+	
+}

@@ -1,0 +1,25 @@
+server:
+  port: 8000
+ 
+spring:
+  application:
+    name: spring-cloud-gateway-dynamic
+ 
+#注册中心指向start    
+eureka:
+  instance:
+    instance-id: spring-cloud-gateway-dynamic
+    appname: ${spring.application.name}
+  client: 
+    service-url: 
+      defaultZone: http://admin:1qaz2wsx@127.0.0.1:8888/eureka/
+#注册中心指向end
+
+zuul:
+  routes:
+    api1:
+      path: /common/**
+      serviceId: spring-cloud-gateway-dynamic
+    api2:
+      path: /chat/**
+      serviceId: spring-cloud-chat

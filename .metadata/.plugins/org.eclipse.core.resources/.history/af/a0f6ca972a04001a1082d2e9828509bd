@@ -1,0 +1,13 @@
+package com.example.demo.filter;
+
+import com.syher.zuul.core.zuul.FilterType;
+import com.syher.zuul.core.zuul.filter.AbstractZuulFilter;
+
+public class AbstractPreZuulFilter  extends AbstractZuulFilter {
+
+	@Override
+	public String filterType() {
+		return FilterType.pre.name();
+	}
+
+}

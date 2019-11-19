@@ -1,0 +1,72 @@
+package com.example.demo.filter;
+
+import com.google.common.collect.Lists;
+4 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+5 import com.syher.zuul.common.Context;
+6 import com.syher.zuul.core.zuul.entity.BasicRoute;
+7 import org.apache.commons.lang.StringUtils;
+8 import org.slf4j.Logger;
+9 import org.slf4j.LoggerFactory;
+10 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
+11 
+12 import java.io.File;
+13 import java.io.IOException;
+14 import java.util.HashMap;
+15 import java.util.List;
+16 import java.util.Map;
+17 import java.util.Properties;
+18 import java.util.concurrent.Executors;
+19 import java.util.concurrent.ScheduledExecutorService;
+20 import java.util.stream.Collectors;
+21 
+22 /**
+23  * @author braska
+24  * @date 2018/07/02.
+25  **/
+26 public class PropertiesRouter extends AbstractDynamicRouter {
+27 
+28     private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesRouter.class);
+29     public static final String PROPERTIES_FILE = "router.properties";
+30     private static final String ZUUL_ROUTER_PREFIX = "zuul.routes";
+31 
+32 
+33     public PropertiesRouter(String servletPath, ZuulProperties properties) {
+34         super(servletPath, properties);
+35     }
+36 
+37     @Override
+38     protected List<BasicRoute> readRoutes() {
+39         List<BasicRoute> list = Lists.newArrayListWithExpectedSize(3);
+40         try {
+41             Properties prop = new Properties();
+42             prop.load(
+43                     this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE)
+44             );
+45 
+46             Context context = new Context(new HashMap<>((Map) prop));
+47             Map<String, String> data = context.getSubProperties(ZUUL_ROUTER_PREFIX);
+48             List<String> ids = data.keySet().stream().map(s -> s.substring(0, s.indexOf("."))).distinct().collect(Collectors.toList());
+49             ids.stream().forEach(id -> {
+50                 Map<String, String> router = context.getSubProperties(String.join(".", ZUUL_ROUTER_PREFIX, id));
+51 
+52                 String path = router.get("path");
+53                 path = path.startsWith("/") ? path : "/" + path;
+54 
+55                 String serviceId = router.getOrDefault("serviceId", null);
+56                 String url = router.getOrDefault("url", null);
+57 
+58                 BasicRoute basicRoute = new BasicRoute();
+59                 basicRoute.setId(id);
+60                 basicRoute.setPath(path);
+61                 basicRoute.setUrl(router.getOrDefault("url", null));
+62                 basicRoute.setServiceId((StringUtils.isBlank(url) && StringUtils.isBlank(serviceId)) ? id : serviceId);
+63                 basicRoute.setRetryable(Boolean.parseBoolean(router.getOrDefault("retry-able", "false")));
+64                 basicRoute.setStripPrefix(Boolean.parseBoolean(router.getOrDefault("strip-prefix", "false")));
+65                 list.add(basicRoute);
+66             });
+67         } catch (IOException e) {
+68             LOGGER.info("error to read " + PROPERTIES_FILE + " :{}", e);
+69         }
+70         return list;
+71     }
+72 }

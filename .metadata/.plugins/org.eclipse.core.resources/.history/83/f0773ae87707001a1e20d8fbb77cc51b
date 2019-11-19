@@ -1,0 +1,25 @@
+{
+  "groups": [{
+    "name": "zuul.ratelimit",
+    "type": "com.rxiu.gateway.core.RateLimitProperties",
+    "sourceType": "com.rxiu.gateway.core.RateLimitProperties"
+  }],
+  "properties": [
+    {
+      "name": "zuul.ratelimit.limit",
+      "type": "java.lang.Long",
+      "sourceType": "com.rxiu.gateway.core.RateLimitProperties"
+    },
+    {
+      "name": "zuul.ratelimit.quota",
+      "type": "java.lang.Long",
+      "sourceType": "com.rxiu.gateway.core.RateLimitProperties"
+    },
+    {
+      "name": "zuul.ratelimit.refresh-interval",
+      "type": "java.lang.Long",
+      "sourceType": "com.rxiu.gateway.core.RateLimitProperties"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,16 @@
+package com;
+ 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+ 
+@SpringBootApplication
+@EnableEurekaClient //Eureka Client
+public class AppMain {
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(AppMain.class).web(true).run(args);
+    }
+}
+————————————————
+版权声明：本文为CSDN博主「Fay_Q」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/o_darling/article/details/82021616

@@ -1,0 +1,12 @@
+package com.rxiu.gateway.core;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties(RateLimitProperties.PREFIX)
+public class RateLimitProperties {
+	
+	public static final String PREFIX = "zuul.ratelimit";
+	
+	
+
+}

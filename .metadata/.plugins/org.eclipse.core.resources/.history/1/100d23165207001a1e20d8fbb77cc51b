@@ -1,0 +1,57 @@
+package com.rxiu.gateway.core.filter;
+
+import com.google.common.util.concurrent.RateLimiter;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.RateLimitKeyGenerator;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.RateLimitUtils;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties;
+import com.rxiu.gateway.core.FilterOrder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
+import org.springframework.web.util.UrlPathHelper;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @author rxiu
+ * @date 2019/4/3
+ */
+public class RateLimiterFilter extends AbstractPreZuulFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RateLimiterFilter.class);
+    private final RateLimitProperties properties;
+    private final RateLimitKeyGenerator rateLimitKeyGenerator;
+    private final RateLimiter rateLimiter;
+    /**
+     * 每秒允许处理的量是5
+     */
+
+    public RateLimiterFilter(RateLimitProperties properties, RouteLocator routeLocator,
+            UrlPathHelper urlPathHelper, RateLimiter rateLimiter, RateLimitKeyGenerator rateLimitKeyGenerator,
+            RateLimitUtils rateLimitUtils) {
+            super(properties, routeLocator, urlPathHelper, rateLimitUtils);
+            this.properties = properties;
+            this.rateLimiter = rateLimiter;
+            this.rateLimitKeyGenerator = rateLimitKeyGenerator;
+     }
+    
+    @Override
+    public int filterOrder() {
+        return FilterOrder.RATE_LIMITER_ORDER;
+    }
+
+    @Override
+    public Object doRun() {
+        HttpServletRequest request = context.getRequest();
+        String url = request.getRequestURI();
+        System.out.println("进入限流流程："+url);
+        if (rateLimiter.tryAcquire()) {
+            return success();
+        } else {
+            LOGGER.info("rate limit:{}", url);
+            return fail(401, String.format("rate limit:{}", url));
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+
+</head>
+<body>
+	<button οnclick="pong()">pong</button>
+</body>
+<script type="text/javascript">
+
+function pong() {
+	console.log("hello");
+	var txt = "hello pong";
+}
+
+
+</script>
+</html>
