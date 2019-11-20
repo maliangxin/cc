@@ -34,8 +34,8 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-aop/5.0.9.RELEASE/spring-aop-5.0.9.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-context/5.0.9.RELEASE/spring-context-5.0.9.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-expression/5.0.9.RELEASE/spring-expression-5.0.9.RELEASE.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit/2.0.4.RELEASE/spring-cloud-zuul-ratelimit-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit-core/2.0.4.RELEASE/spring-cloud-zuul-ratelimit-core-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit/2.2.2.RELEASE/spring-cloud-zuul-ratelimit-2.2.2.RELEASE.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit-core/2.2.2.RELEASE/spring-cloud-zuul-ratelimit-core-2.2.2.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/cloud/spring-cloud-netflix-zuul/2.0.4.RELEASE/spring-cloud-netflix-zuul-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/cloud/spring-cloud-netflix-core/2.0.4.RELEASE/spring-cloud-netflix-core-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-starter-aop/2.0.5.RELEASE/spring-boot-starter-aop-2.0.5.RELEASE.jar" enabled="true" runInBatchMode="false"/>
@@ -59,7 +59,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/google/guava/guava/15.0/guava-15.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/io/reactivex/rxjava-reactive-streams/1.2.1/rxjava-reactive-streams-1.2.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/cloud/spring-cloud-starter-netflix-zuul/2.0.1.RELEASE/spring-cloud-starter-netflix-zuul-2.0.1.RELEASE.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/cloud/spring-cloud-starter-netflix-zuul/2.0.4.RELEASE/spring-cloud-starter-netflix-zuul-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/cloud/spring-cloud-starter/2.0.4.RELEASE/spring-cloud-starter-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/cloud/spring-cloud-context/2.0.4.RELEASE/spring-cloud-context-2.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/security/spring-security-crypto/5.0.8.RELEASE/spring-security-crypto-5.0.8.RELEASE.jar" enabled="true" runInBatchMode="false"/>

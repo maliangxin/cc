@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.dynamic.gateway"})
 @EnableEurekaClient
 public class DynamicGatewayApplication {
-
+            
     public static void main(String[] args) {
         SpringApplication.run(DynamicGatewayApplication.class, args);
     }
