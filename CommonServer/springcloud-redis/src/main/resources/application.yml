@@ -1,0 +1,10 @@
+server:
+  port: 8079
+ 
+spring:
+  application:
+    name: spring-cloud-redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 

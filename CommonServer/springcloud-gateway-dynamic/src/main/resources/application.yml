@@ -24,12 +24,11 @@ zuul:
       path: /chat/**
       serviceId: spring-cloud-chat
   ratelimit:
-   
-      api1:
+     api1:
         limit: 1
         refresh-interval: 10
         type: url
-      api2:
+     api2:
         limit: 1
         refresh-interval: 10
         type: url

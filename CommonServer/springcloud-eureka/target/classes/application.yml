@@ -1,13 +1,13 @@
 server:
   port: 8888
 
-security: 
-    basic: 
-        enable: true
-    user: 
-        name: admin
-        password: 1qaz2wsx
-
+spring:
+  security: 
+      basic: 
+          enable: true
+      user: 
+          name: admin
+          password: 1qaz2wsx
 eureka:
   instance:
     hostname: localhost

@@ -1,0 +1,22 @@
+server:
+  port: 8000
+ 
+spring:
+  application:
+    name: spring-cloud-gateway-static
+  redis:
+    host: 127.0.0.1
+    password: 
+
+zuul:
+  routes:
+    api1:
+      path: /common/**
+      url: http://localhost:8000
+  ratelimit:
+     enabled: true
+     policies:
+        api1: 
+           limit: 1
+           refresh-interval: 10
+           type: url

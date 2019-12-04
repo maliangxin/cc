@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mal.springcloud</groupId>
@@ -5,68 +6,108 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		 <module>spring-register</module><!--注册中心项目-->
-		 <module>springcloud-eureka</module>
-		 <module>springcloud-chat</module>
-		 <module>springcloud-gateway-dynamic</module>
-		 <module>springcloud-gateway-static</module>
-	</modules>
+		<module>spring-register</module><!--注册中心项目 -->
+		<module>springcloud-eureka</module>
+		<module>springcloud-chat</module>
+		<module>springcloud-gateway-dynamic</module>
+		<module>springcloud-gateway-static</module>
+    <module>springcloud-redis</module>
+  </modules>
 	<parent>
-	    <groupId>org.springframework.boot</groupId>
-    	<artifactId>spring-boot-starter-parent</artifactId>
-    	<version>2.0.5.RELEASE</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.5.RELEASE</version>
 	</parent>
 	<!-- 声明管理 -->
-	<dependencyManagement> 
-		<dependencies> 
-       		<dependency>
-			    <groupId>org.springframework.cloud</groupId>
-			    <artifactId>spring-cloud-dependencies</artifactId>
-			    <version>Finchley.SR3</version>
-			    <type>pom</type>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Finchley.SR3</version>
+				<type>pom</type>
 			</dependency>
-    	</dependencies> 
+		</dependencies>
 	</dependencyManagement>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-		    <version>2.0.4.RELEASE</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+			<version>2.0.4.RELEASE</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		    <version>2.0.4.RELEASE</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<version>2.0.4.RELEASE</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.marcosbarbero.cloud</groupId>
-		    <artifactId>spring-cloud-zuul-ratelimit-dependencies</artifactId>
-		    <version>2.0.5.RELEASE</version>
-		    <type>pom</type>
+			<groupId>com.marcosbarbero.cloud</groupId>
+			<artifactId>spring-cloud-zuul-ratelimit-dependencies</artifactId>
+			<version>2.0.5.RELEASE</version>
+			<type>pom</type>
 		</dependency>
-		
-        <!--暴露各种指标 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!-- 热部署模块 -->
+
+		<!--暴露各种指标 -->
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-devtools</artifactId>
-		    <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		      
+		<!-- 热部署模块 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- springboaded hot deploy -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>springloaded</artifactId>
+			<version>1.2.4.RELEASE</version>
+		</dependency>
+		
+		<!-- redis -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		
 	</dependencies>
-	
+
+	<!-- 构建节点 -->
+	<build>
+		<plugins>
+			<!-- 在这里添加springloader plugin -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork><!-- 如果没有该配置，热部署的devtools不生效 -->
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
 </project>

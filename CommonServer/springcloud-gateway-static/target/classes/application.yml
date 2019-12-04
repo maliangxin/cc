@@ -5,11 +5,15 @@ spring:
   application:
     name: spring-cloud-gateway-static
 
+
 zuul:
   routes:
     api1:
       path: /common/**
       url: http://localhost:8000
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 20000
   ratelimit:
      enabled: true
      policies:
